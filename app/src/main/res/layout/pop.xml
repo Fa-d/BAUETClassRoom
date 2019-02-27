@@ -1,81 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="5dp"
+
     android:background="@drawable/layout_popup_shape"
     >
-    <TextView
-        android:id="@+id/text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Post"
-        android:textSize="34sp" />
 
-    <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
-        android:id="@+id/typespinner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Select type: "
-        android:textColorHint="#0A440A"
-        android:background="#D9E1F1"
-        />
-
-    <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
-        android:id="@+id/subjectspinner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Select subject: "
-        android:textColorHint="#0A440A"
-        android:background="#D9E1F1"
-        />
-    <EditText
-        android:id="@+id/description"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter Description"
-        />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        >
+        android:orientation="vertical"
+        android:padding="5dp">
+
+
         <TextView
+            android:id="@+id/text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add Files ??"
-            android:textSize="35sp"
+            android:layout_gravity="center"
+            android:text="Post"
+            android:textSize="34sp" />
 
-            />
-        <RadioGroup
-            android:id="@+id/files_grp"
-            android:paddingLeft="20dp"
+        <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
+            android:id="@+id/typespinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Select type: "
+            android:textColorHint="#0A440A"
+            android:background="#D9E1F1" />
+
+        <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
+            android:id="@+id/subjectspinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Select subject: "
+            android:textColorHint="#0A440A"
+            android:background="#D9E1F1" />
+
+        <EditText
+            android:id="@+id/description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter Description" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add Files ??"
+                android:textSize="35sp"
+
+                />
+
+            <RadioGroup
+                android:id="@+id/files_grp"
+                android:paddingLeft="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <RadioButton
+                    android:id="@+id/files_yes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Yes" />
+
+                <RadioButton
+                    android:id="@+id/files_no"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="No" />
+            </RadioGroup>
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/files_button"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-            <RadioButton
-                android:id="@+id/files_yes"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Yes"
-                />
-            <RadioButton
-                android:id="@+id/files_no"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="No"
-                />
-        </RadioGroup>
-    </LinearLayout>
-    <ImageButton
-        android:id="@+id/files_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@mipmap/ic_add"
-        android:visibility="gone"
-        />
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_add"
+            android:background="#FFFFFF"
+            android:visibility="gone" />
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/filenames"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingTop="20dp"
+            android:text="Post" />
+    </LinearLayout>
+
+</ScrollView>
