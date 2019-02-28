@@ -1,4 +1,4 @@
-package go.faddy.com.agin2;
+package go.faddy.com.agin2.Fragments;
 
 
 import android.content.Intent;
@@ -22,6 +22,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import go.faddy.com.agin2.Pop;
+import go.faddy.com.agin2.R;
 import go.faddy.com.agin2.utils.DrawableUtils;
 
 

@@ -5,6 +5,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
+import go.faddy.com.agin2.Fragments.CalenderFrag;
+import go.faddy.com.agin2.Fragments.NoticeFrag;
+import go.faddy.com.agin2.Fragments.RoutineFrag;
+
 public class tabpagerAdapter extends FragmentStatePagerAdapter {
     String[] tabarray = new String[]{"Routine", "Notice", "Calendar"};
 

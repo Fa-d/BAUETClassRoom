@@ -1,4 +1,4 @@
-package go.faddy.com.agin2;
+package go.faddy.com.agin2.Fragments;
 
 
 import android.os.Bundle;
@@ -6,6 +6,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import go.faddy.com.agin2.R;
 
 
 /**

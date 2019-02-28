@@ -42,7 +42,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
-import static go.faddy.com.agin2.CalenderFrag.STRING_EXTRA;
+import static go.faddy.com.agin2.Fragments.CalenderFrag.STRING_EXTRA;
 
 public class Pop extends Activity {
     RadioButton filesYes, filesNo, radioButton;
@@ -189,7 +189,10 @@ public class Pop extends Activity {
                     progressDialog.setProgress(0);
                     progressDialog.show();
                     final DatabaseReference conditionRef = mRootref.child("posts").child("type").child(typeUp.trim()).push();
-                    conditionRef.child("enddate").setValue(day + "\\" + monthNumber + "\\" + year);
+                    DatabaseReference dateRef =  conditionRef.child("date");
+                    dateRef.child("day").setValue(day);
+                    dateRef.child("month").setValue(monthNumber);
+                    dateRef.child("year").setValue(year);
                     conditionRef.child("subject").setValue(subUp.trim());
                     desrpUp = editText.getText().toString();
                     conditionRef.child("description").setValue(desrpUp);
@@ -237,7 +240,11 @@ public class Pop extends Activity {
 
                 } else {
                     final DatabaseReference conditionRef = mRootref.child("posts").child("type").child(typeUp.trim()).push();
-                    conditionRef.child("enddate").setValue(day + "\\" + monthNumber + "\\" + year);
+                    DatabaseReference dateRef =  conditionRef.child("date");
+                    dateRef.child("day").setValue(day);
+                    dateRef.child("month").setValue(monthNumber);
+                    dateRef.child("year").setValue(year);
+//                    conditionRef.child("enddate").setValue(day + "\\" + monthNumber + "\\" + year);
                     conditionRef.child("subject").setValue(subUp.trim());
                     desrpUp = editText.getText().toString();
                     conditionRef.child("description").setValue(desrpUp).addOnCompleteListener(new OnCompleteListener<Void>() {
