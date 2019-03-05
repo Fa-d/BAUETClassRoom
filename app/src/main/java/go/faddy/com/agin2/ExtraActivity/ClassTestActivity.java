@@ -16,15 +16,16 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import go.faddy.com.agin2.Adapters.MainRetriveAdapter;
-import go.faddy.com.agin2.Adapters.Retrive;
+import go.faddy.com.agin2.Adapters.VerticalRecyclerViewAdapter;
+import go.faddy.com.agin2.Models.VerticalModel;
 import go.faddy.com.agin2.R;
 
 public class ClassTestActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
-    private MainRetriveAdapter mAdapter;
+    private VerticalRecyclerViewAdapter mAdapter;
     private DatabaseReference mDatabaseRef;
-    private List<Retrive> mRetrive;
+    private List<VerticalModel> mVerticalModel;
+
     static Vibrator v;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,21 +35,25 @@ public class ClassTestActivity extends AppCompatActivity {
         mRecyclerView = findViewById(R.id.recycler_view);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mRetrive = new ArrayList<>();
+        mVerticalModel = new ArrayList<>();
         mDatabaseRef = FirebaseDatabase.getInstance().getReference().child("posts").child("type").child("class_test");
+
         mDatabaseRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot postSnapshot : dataSnapshot.getChildren()){
-                    Retrive retrive = postSnapshot.getValue(Retrive.class);
-                    mRetrive.add(retrive);
+                    VerticalModel verticalModel = postSnapshot.getValue(VerticalModel.class);
+                    mVerticalModel.add(verticalModel);
+//                    mDatabaseRef.child("photos");
                     v.vibrate(90);
                 }
-                mAdapter = new MainRetriveAdapter(ClassTestActivity.this, mRetrive);
+                mAdapter = new VerticalRecyclerViewAdapter(getApplicationContext(), mVerticalModel);
                 mRecyclerView.setAdapter(mAdapter);
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
+
             }
         });
     }
