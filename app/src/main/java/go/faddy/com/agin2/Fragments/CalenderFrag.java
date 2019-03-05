@@ -38,6 +38,7 @@ public class CalenderFrag extends Fragment implements OnSelectDateListener {
     public String day_, month_, year_;
     CalendarView calendarView;
     Intent intent;
+
     public CalenderFrag() {
         // Required empty public constructor
     }
@@ -76,7 +77,7 @@ public class CalenderFrag extends Fragment implements OnSelectDateListener {
                 radioButton = v.findViewById(radioId);
                 getRadio = v.findViewById(R.id.get);
                 postRadio = v.findViewById(R.id.post);
-                if(radioButton == getRadio){
+                if (radioButton == getRadio) {
                     day = eventDay.getCalendar().getTime().getDate();
                     day_ = String.valueOf(day);
                     month = eventDay.getCalendar().getTime().getMonth();
@@ -87,8 +88,7 @@ public class CalenderFrag extends Fragment implements OnSelectDateListener {
 
 //                    Snackbar.make(getView(), (int) d, Snackbar.LENGTH_LONG)
 //                           .setAction("Action", null).show();
-                }
-                else if(radioButton == postRadio){
+                } else if (radioButton == postRadio) {
                     day = eventDay.getCalendar().getTime().getDate();
                     month = eventDay.getCalendar().getTime().getMonth();
                     year = eventDay.getCalendar().getTime().getYear();
@@ -100,8 +100,7 @@ public class CalenderFrag extends Fragment implements OnSelectDateListener {
 
                     Snackbar.make(getView(), "Post Selected", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
-                }
-                else{
+                } else {
                     Snackbar.make(getView(), "Some error happend", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
                 }

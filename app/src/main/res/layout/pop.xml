@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/layout_popup_shape">
 
@@ -23,17 +23,17 @@
             android:id="@+id/typespinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#D9E1F1"
             android:hint="Select type: "
-            android:textColorHint="#0A440A"
-            android:background="#D9E1F1" />
+            android:textColorHint="#0A440A" />
 
         <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
             android:id="@+id/subjectspinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#D9E1F1"
             android:hint="Select subject: "
-            android:textColorHint="#0A440A"
-            android:background="#D9E1F1" />
+            android:textColorHint="#0A440A" />
 
         <EditText
             android:id="@+id/description"
@@ -50,14 +50,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Add Files ??"
-                android:textSize="35sp"
-                />
+                android:textSize="35sp" />
 
             <RadioGroup
                 android:id="@+id/files_grp"
-                android:paddingLeft="20dp"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:paddingLeft="20dp">
 
                 <RadioButton
                     android:id="@+id/files_yes"
@@ -78,8 +77,8 @@
             android:id="@+id/files_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/ic_add"
             android:background="#FFFFFF"
+            android:src="@mipmap/ic_add"
             android:visibility="gone" />
 
         <TextView

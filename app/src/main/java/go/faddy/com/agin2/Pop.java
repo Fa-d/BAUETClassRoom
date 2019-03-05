@@ -17,6 +17,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -41,6 +42,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 import static go.faddy.com.agin2.Fragments.CalenderFrag.STRING_EXTRA;
 
@@ -56,6 +58,7 @@ public class Pop extends Activity {
     String typeUp, subUp, desrpUp;
     DatabaseReference mRootref = FirebaseDatabase.getInstance().getReference();
     StorageReference ster;
+    DatabaseReference storageRef;
     ProgressDialog progressDialog;
     View.OnClickListener button_ = new View.OnClickListener() {
         @Override
@@ -95,7 +98,7 @@ public class Pop extends Activity {
         getWindowManager().getDefaultDisplay().getMetrics(dm);
         int width = dm.widthPixels;
         int height = dm.heightPixels;
-        getWindow().setLayout((int)(width*.8), (int)(height*.7));
+        getWindow().setLayout((int) (width * .8), (int) (height * .7));
 
         fileNameList = new ArrayList<>();
         ster = FirebaseStorage.getInstance().getReference();
@@ -157,7 +160,6 @@ public class Pop extends Activity {
         editText = findViewById(R.id.description);
 
 
-
         //Files spinner
         radioGroup = findViewById(R.id.files_grp);
         filesYes = findViewById(R.id.files_yes);
@@ -168,9 +170,9 @@ public class Pop extends Activity {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 int radioId = radioGroup.getCheckedRadioButtonId();
                 radioButton = findViewById(radioId);
-                if(radioButton == filesYes){
+                if (radioButton == filesYes) {
                     button.setVisibility(View.VISIBLE);
-                }else{
+                } else {
                     button.setVisibility(View.GONE);
                 }
             }
@@ -188,11 +190,28 @@ public class Pop extends Activity {
                     progressDialog.setTitle("Uploading file...");
                     progressDialog.setProgress(0);
                     progressDialog.show();
-                    final DatabaseReference conditionRef = mRootref.child("posts").child("type").child(typeUp.trim()).push();
-                    DatabaseReference dateRef =  conditionRef.child("date");
-                    dateRef.child("day").setValue(day);
-                    dateRef.child("month").setValue(monthNumber);
-                    dateRef.child("year").setValue(year);
+                    String type;
+                    switch (typeUp) {
+                        case "Class-Test":
+                            type = "class_test";
+                            break;
+                        case "Home-Work":
+                            type = "home_work";
+                            break;
+                        case "Lab-Report":
+                            type = "lab_report";
+                            break;
+                        default:
+                            type = "assignment";
+                            break;
+                    }
+                    final DatabaseReference conditionRef = mRootref.child("posts").child("type").child(type).push();
+                    String timeStamp = String.valueOf(TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis()));
+                    DatabaseReference dataRef = mRootref.child("posts").child("images");
+                    conditionRef.child("time_stamp").setValue(timeStamp);
+                    conditionRef.child("day").setValue(day);
+                    conditionRef.child("month").setValue(monthNumber);
+                    conditionRef.child("year").setValue(year);
                     conditionRef.child("subject").setValue(subUp.trim());
                     desrpUp = editText.getText().toString();
                     conditionRef.child("description").setValue(desrpUp);
@@ -200,6 +219,7 @@ public class Pop extends Activity {
                     for (int i = 0; i < fileNameList.size(); i++) {
                         StorageReference filetoupload = ster.child("images").child(fileNameList.get(i));
                         final int finalI = i;
+                        int finalI1 = i;
                         filetoupload.putFile(uris.get(i)).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                             @Override
                             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -208,7 +228,7 @@ public class Pop extends Activity {
                                     @Override
                                     public void onSuccess(Uri uri) {
                                         String photoStringLink = uri.toString();
-                                        conditionRef.child("photos").push().setValue(photoStringLink).addOnFailureListener(new OnFailureListener() {
+                                        dataRef.child(timeStamp).child(String.valueOf(finalI1)).setValue(photoStringLink).addOnFailureListener(new OnFailureListener() {
                                             @Override
                                             public void onFailure(@NonNull Exception e) {
                                                 Toast.makeText(Pop.this, "Failed to upload file " + fileNameList.get(finalI), Toast.LENGTH_SHORT).show();
@@ -239,11 +259,31 @@ public class Pop extends Activity {
                     }
 
                 } else {
-                    final DatabaseReference conditionRef = mRootref.child("posts").child("type").child(typeUp.trim()).push();
-                    DatabaseReference dateRef =  conditionRef.child("date");
-                    dateRef.child("day").setValue(day);
-                    dateRef.child("month").setValue(monthNumber);
-                    dateRef.child("year").setValue(year);
+                    String type;
+                    switch (typeUp) {
+                        case "Class-Test":
+                            type = "class_test";
+                            break;
+                        case "Home-Work":
+                            type = "home_work";
+                            break;
+                        case "Lab-Report":
+                            type = "lab_report";
+                            break;
+                        default:
+                            type = "assignment";
+                            break;
+                    }
+                    final DatabaseReference conditionRef = mRootref.child("posts").child("type").child(type).push();
+
+                    String timeStamp = String.valueOf(TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis()));
+                    DatabaseReference dataRef = mRootref.child("posts").child("images");
+                    dataRef.child(timeStamp).setValue("null");
+                    conditionRef.child("time_stamp").setValue(timeStamp);
+                    conditionRef.child("day").setValue(day);
+                    conditionRef.child("month").setValue(monthNumber);
+                    conditionRef.child("year").setValue(year);
+
 //                    conditionRef.child("enddate").setValue(day + "\\" + monthNumber + "\\" + year);
                     conditionRef.child("subject").setValue(subUp.trim());
                     desrpUp = editText.getText().toString();

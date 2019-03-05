@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import go.faddy.com.agin2.Adapters.tabpagerAdapter;
 import go.faddy.com.agin2.ExtraActivity.ClassTestActivity;
 
 public class MainActivity extends AppCompatActivity
@@ -31,7 +32,6 @@ public class MainActivity extends AppCompatActivity
         tabpagerAdapter TabPagerAdapter = new tabpagerAdapter(getSupportFragmentManager());
         pager.setAdapter(TabPagerAdapter);
         tabLayout.setupWithViewPager(pager);
-
 
 
 //        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -67,12 +67,14 @@ public class MainActivity extends AppCompatActivity
             super.onBackPressed();
         }
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will

@@ -34,9 +34,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
-public class LoginActivity extends AppCompatActivity{
 
-    private FirebaseAuth mAuth =  FirebaseAuth.getInstance();
+public class LoginActivity extends AppCompatActivity {
+
+    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     DatabaseReference registredRef = FirebaseDatabase.getInstance().getReference();
     ProgressBar progressBar;
     EditText email, id_no, pass, pass_again;
@@ -48,7 +49,7 @@ public class LoginActivity extends AppCompatActivity{
     SharedPreferences.Editor editor;
 
 
-    static class for_id{
+    static class for_id {
         static boolean Student_id_list(int x) {
             HashMap<Integer, String> hmap = new HashMap<Integer, String>();
             hmap.put(17104003, "Tasmin Tabussum");
@@ -73,7 +74,7 @@ public class LoginActivity extends AppCompatActivity{
             hmap.put(17104023, "Hasnahena Muntarim Mim");
             hmap.put(17104024, "Md. Atikur Rashid");
             hmap.put(17104025, "Hassan Md. Zubair");
-            hmap.put(17104026,"Md. Muktadir Mahmud Tashar");
+            hmap.put(17104026, "Md. Muktadir Mahmud Tashar");
             hmap.put(17104027, "Shafayet Alam");
             hmap.put(17104028, "Ummey Khadiza");
             hmap.put(17104029, "Md. Mehadi Hasan");
@@ -83,7 +84,7 @@ public class LoginActivity extends AppCompatActivity{
             hmap.put(17104033, "Labonna Islam");
             hmap.put(17104034, "Md. Jahangir Hossein");
             hmap.put(17104035, "Barnita Basak Trisha");
-            hmap.put(17104036,"Shahrin Sumona");
+            hmap.put(17104036, "Shahrin Sumona");
             hmap.put(17104037, "Samia Tanous");
             hmap.put(17104038, "Md.Sadakat Hussain Fahad");
             hmap.put(17104039, "Ashikur Rahman");
@@ -92,7 +93,7 @@ public class LoginActivity extends AppCompatActivity{
             hmap.put(17104042, "Monira Perveen");
             hmap.put(17104044, "Subarna Saha");
             hmap.put(17104045, "Ridhita Saha");
-            hmap.put(17104046,"Sourav kumar Sarkar");
+            hmap.put(17104046, "Sourav kumar Sarkar");
             hmap.put(17104047, "Md. Tanjil Mahamud Nion");
             hmap.put(17104048, "Tahmina Tahrim");
             hmap.put(17104049, "Rayhanuzzaman");
@@ -102,7 +103,7 @@ public class LoginActivity extends AppCompatActivity{
             hmap.put(17104053, "Meher-Un-Nesa Meghla");
             hmap.put(17104054, "Md. Taufiqul Islam");
             hmap.put(17104055, "Abdullah Al Imran");
-            hmap.put(17104056,"Jahid  Hasan");
+            hmap.put(17104056, "Jahid  Hasan");
             hmap.put(17104057, "Avik Roy");
             hmap.put(17104059, "Farhana Tarajji Payel");
             hmap.put(17104060, "Mahtashan  Mohammad  Mridul");
@@ -111,11 +112,11 @@ public class LoginActivity extends AppCompatActivity{
             hmap.put(17104063, "Nusrat Afrin Trisha");
             hmap.put(17104064, "Md. Sujan Molla");
             hmap.put(17104065, "Md. Maruf");
-            hmap.put(17104066,"Md. Abdullah Al Mamun");
+            hmap.put(17104066, "Md. Abdullah Al Mamun");
             hmap.put(17104067, "Md. Nasir Uddin");
             hmap.put(17104068, "Tamim");
             nav_NAME = hmap.get(x);
-            nav_ID  = x;
+            nav_ID = x;
             return hmap.containsKey(x);
         }
     }
@@ -134,8 +135,8 @@ public class LoginActivity extends AppCompatActivity{
         final SharedPreferences sp;
         progressBar = findViewById(R.id.progressar);
         final SharedPreferences[] good = new SharedPreferences[1];
-        sp = getSharedPreferences("login",MODE_PRIVATE);
-        if(sp.getBoolean("logged",false)){
+        sp = getSharedPreferences("login", MODE_PRIVATE);
+        if (sp.getBoolean("logged", false)) {
             goToMainActivity();
         }
 
@@ -151,20 +152,20 @@ public class LoginActivity extends AppCompatActivity{
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!(isConnectedToInternet(getApplicationContext()))) {
+                if (!(isConnectedToInternet(getApplicationContext()))) {
                     Snackbar.make(view, "Check your internet connection first !!", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-                }else{
-                    if(TextUtils.isEmpty(id_no.getText().toString().trim()) || TextUtils.isEmpty(pass.getText().toString().trim()) || TextUtils.isEmpty(email.getText().toString().trim()) || TextUtils.isEmpty(pass_again.getText().toString().trim())){
+                } else {
+                    if (TextUtils.isEmpty(id_no.getText().toString().trim()) || TextUtils.isEmpty(pass.getText().toString().trim()) || TextUtils.isEmpty(email.getText().toString().trim()) || TextUtils.isEmpty(pass_again.getText().toString().trim())) {
                         Snackbar.make(view, "Something is null check again", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-                    }else{
+                    } else {
                         int x = Integer.parseInt(id_no.getText().toString().trim());
-                        if(for_id.Student_id_list(x)){
-                            if(pass.getText().toString().trim().equals(pass_again.getText().toString().trim())){
+                        if (for_id.Student_id_list(x)) {
+                            if (pass.getText().toString().trim().equals(pass_again.getText().toString().trim())) {
                                 mAuth.createUserWithEmailAndPassword(email.getText().toString().trim(),
                                         pass.getText().toString().trim()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                     @Override
                                     public void onComplete(@NonNull Task<AuthResult> task) {
-                                        if(task.isSuccessful()){
+                                        if (task.isSuccessful()) {
                                             Toast.makeText(LoginActivity.this, "Registration Sucessful", Toast.LENGTH_SHORT).show();
                                             goToMainActivity();
                                             sp.edit().putBoolean("logged", true).apply();
@@ -173,13 +174,13 @@ public class LoginActivity extends AppCompatActivity{
                                             editor = sharedPreferences.edit();
                                             editor.putString("username", nav_NAME).putString("useID", String.valueOf(nav_ID)).apply();
                                             finish();
-                                        }else{
-                                            if(task.getException() instanceof FirebaseAuthUserCollisionException){
+                                        } else {
+                                            if (task.getException() instanceof FirebaseAuthUserCollisionException) {
                                                 Toast.makeText(LoginActivity.this, "You are already registred", Toast.LENGTH_SHORT).show();
                                                 mAuth.signInWithEmailAndPassword(email.getText().toString().trim(), pass.getText().toString().trim()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                                     @Override
                                                     public void onComplete(@NonNull Task<AuthResult> task) {
-                                                        if(task.isSuccessful()){
+                                                        if (task.isSuccessful()) {
                                                             Toast.makeText(LoginActivity.this, "You would have been logged in by now", Toast.LENGTH_SHORT).show();
                                                             goToMainActivity();
                                                             sp.edit().putBoolean("logged", true).apply();
@@ -187,7 +188,7 @@ public class LoginActivity extends AppCompatActivity{
                                                             editor = good[0].edit();
                                                             editor.putString("username", nav_NAME).putString("useID", String.valueOf(nav_ID)).apply();
                                                             finish();
-                                                        }else{
+                                                        } else {
                                                             Toast.makeText(LoginActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                                                         }
                                                     }
@@ -196,10 +197,10 @@ public class LoginActivity extends AppCompatActivity{
                                         }
                                     }
                                 });
-                            }else{
+                            } else {
                                 pass_again.setError("The passwords didn't match");
                             }
-                        }else{
+                        } else {
                             id_no.setError("Invalid ID");
                         }
                     }
@@ -216,6 +217,7 @@ public class LoginActivity extends AppCompatActivity{
         i.putExtra("id", nav_ID);
         startActivity(i);
     }
+
     private boolean isConnectedToInternet(Context context) {
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = cm.getActiveNetworkInfo();

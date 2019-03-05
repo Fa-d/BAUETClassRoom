@@ -12,29 +12,29 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        app:type="one_day_picker"
-        app:eventsEnabled="true" />
+        app:eventsEnabled="true"
+        app:type="one_day_picker" />
+
     <RadioGroup
         android:id="@+id/radiogroup"
-        android:layout_gravity="center"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
 
-            <RadioButton
-                android:id="@+id/get"
-                android:layout_weight="1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="Get"
-                />
-            <RadioButton
-                android:id="@+id/post"
-                android:layout_weight="1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Post"
-                />
+        <RadioButton
+            android:id="@+id/get"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="true"
+            android:text="Get" />
+
+        <RadioButton
+            android:id="@+id/post"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Post" />
 
     </RadioGroup>
 

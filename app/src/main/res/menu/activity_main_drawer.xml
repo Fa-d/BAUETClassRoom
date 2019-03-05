@@ -9,7 +9,7 @@
                 android:id="@+id/nav_home"
                 android:icon="@drawable/ic_menu_camera"
                 android:title="Home" />
-            </item>
+        </item>
     </group>
 
     <group android:checkableBehavior="single">
@@ -18,11 +18,11 @@
                 <item
                     android:id="@+id/nav_hw"
                     android:icon="@drawable/ic_menu_share"
-                    android:title="Home-Work" />
+                    android:title="Home Work" />
                 <item
                     android:id="@+id/nav_ct"
                     android:icon="@drawable/ic_menu_send"
-                    android:title="Class-Test" />
+                    android:title="Class Test" />
                 <item
                     android:id="@+id/nav_ass"
                     android:icon="@drawable/ic_menu_gallery"
@@ -30,7 +30,7 @@
                 <item
                     android:id="@+id/nav_labr"
                     android:icon="@drawable/ic_menu_slideshow"
-                    android:title="Lab-Report" />
+                    android:title="Lab Report" />
 
             </menu>
         </item>

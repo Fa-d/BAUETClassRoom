@@ -7,6 +7,7 @@ import android.graphics.drawable.LayerDrawable;
 import android.support.v4.content.ContextCompat;
 
 import go.faddy.com.agin2.R;
+
 import com.applandeo.materialcalendarview.CalendarUtils;
 
 
@@ -20,7 +21,7 @@ public final class DrawableUtils {
         return new LayerDrawable(layers);
     }
 
-    public static Drawable getThreeDots(Context context){
+    public static Drawable getThreeDots(Context context) {
         Drawable drawable = ContextCompat.getDrawable(context, R.drawable.sample_three_icons);
 
         //Add padding to too large icon
