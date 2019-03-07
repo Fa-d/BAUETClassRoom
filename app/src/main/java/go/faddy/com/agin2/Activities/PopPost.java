@@ -1,4 +1,4 @@
-package go.faddy.com.agin2;
+package go.faddy.com.agin2.Activities;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -14,51 +14,42 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
-
+import go.faddy.com.agin2.R;
 import static go.faddy.com.agin2.Fragments.CalenderFrag.STRING_EXTRA;
 
-public class Pop extends Activity {
+public class PopPost extends Activity {
     RadioButton filesYes, filesNo, radioButton;
     RadioGroup radioGroup;
     ImageButton button;
     private static final int RQS_OPEN = 1;
-    Button buttonOpen;
     EditText editText;
     TextView textUri;
     ArrayList<Uri> uris = new ArrayList<Uri>();
     String typeUp, subUp, desrpUp;
     DatabaseReference mRootref = FirebaseDatabase.getInstance().getReference();
     StorageReference ster;
-    DatabaseReference storageRef;
     ProgressDialog progressDialog;
     View.OnClickListener button_ = new View.OnClickListener() {
         @Override
@@ -72,14 +63,13 @@ public class Pop extends Activity {
             intent.putExtra(Intent.EXTRA_MIME_TYPES, extraMimeTypes);
             intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
             startActivityForResult(intent, RQS_OPEN);
-            Toast.makeText(Pop.this,
+            Toast.makeText(PopPost.this,
                     "Single-selection: Tap on any file.\n" +
                             "Multi-selection: Tap & Hold on the first file, " +
                             "tap for more, tap on OPEN to finish.",
                     Toast.LENGTH_LONG).show();
         }
     };
-
 
     String[] typeList = {"Class-Test", "Home-Work", "Assignment", "Lab-Report"};
     String[] subjectList = {"Database Management", "Database Management (Sessional)", "Compiler",
@@ -88,7 +78,6 @@ public class Pop extends Activity {
             " Programming(Sessional)", "Computer Network", "Computer Network(Sessional)"
     };
     private List<String> fileNameList;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,24 +88,8 @@ public class Pop extends Activity {
         int width = dm.widthPixels;
         int height = dm.heightPixels;
         getWindow().setLayout((int) (width * .8), (int) (height * .7));
-
         fileNameList = new ArrayList<>();
         ster = FirebaseStorage.getInstance().getReference();
-        mRootref.orderByChild("Date").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot ddsp1 : dataSnapshot.getChildren()) {
-                    for (DataSnapshot ddsp2 : dataSnapshot.getChildren()) {
-
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
         //getting date intents
         Bundle bundle = getIntent().getExtras();
         Long good = bundle.getLong(STRING_EXTRA);
@@ -126,10 +99,6 @@ public class Pop extends Activity {
         String monthString = (String) DateFormat.format("MMM", today);
         String monthNumber = (String) DateFormat.format("MM", today);
         String year = (String) DateFormat.format("yyyy", today);
-        Toast.makeText(this, day + "\n" + monthNumber + "\n" + year,
-                Toast.LENGTH_SHORT).show();
-
-
         //type drop down
         ArrayAdapter<String> typearrayAdapter = new ArrayAdapter<String>(this,
                 R.layout.support_simple_spinner_dropdown_item, typeList);
@@ -139,10 +108,9 @@ public class Pop extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 typeUp = parent.getItemAtPosition(position).toString();
-                Toast.makeText(Pop.this, typeUp, Toast.LENGTH_SHORT).show();
+                Toast.makeText(PopPost.this, typeUp, Toast.LENGTH_SHORT).show();
             }
         });
-
         //Subject dropdown
         ArrayAdapter<String> subjectarrayAdapter = new ArrayAdapter<String>(this,
                 R.layout.support_simple_spinner_dropdown_item, subjectList);
@@ -152,14 +120,11 @@ public class Pop extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 subUp = parent.getItemAtPosition(position).toString();
-                Toast.makeText(Pop.this, subUp, Toast.LENGTH_SHORT).show();
+                Toast.makeText(PopPost.this, subUp, Toast.LENGTH_SHORT).show();
             }
         });
-
         // text from description box
         editText = findViewById(R.id.description);
-
-
         //Files spinner
         radioGroup = findViewById(R.id.files_grp);
         filesYes = findViewById(R.id.files_yes);
@@ -185,7 +150,7 @@ public class Pop extends Activity {
             @Override
             public void onClick(View v) {
                 if (button.getVisibility() == View.VISIBLE) {
-                    progressDialog = new ProgressDialog(Pop.this);
+                    progressDialog = new ProgressDialog(PopPost.this);
                     progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
                     progressDialog.setTitle("Uploading file...");
                     progressDialog.setProgress(0);
@@ -231,7 +196,7 @@ public class Pop extends Activity {
                                         dataRef.child(timeStamp).child(String.valueOf(finalI1)).setValue(photoStringLink).addOnFailureListener(new OnFailureListener() {
                                             @Override
                                             public void onFailure(@NonNull Exception e) {
-                                                Toast.makeText(Pop.this, "Failed to upload file " + fileNameList.get(finalI), Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(PopPost.this, "Failed to upload file " + fileNameList.get(finalI), Toast.LENGTH_SHORT).show();
                                             }
                                         });
                                     }
@@ -240,7 +205,7 @@ public class Pop extends Activity {
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(Pop.this, "Failed to upload any files", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(PopPost.this, "Failed to upload any files", Toast.LENGTH_SHORT).show();
                             }
                         }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
                             @Override
@@ -251,7 +216,7 @@ public class Pop extends Activity {
                         }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                             @Override
                             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                Toast.makeText(Pop.this, "Done upoading ", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(PopPost.this, "Done upoading ", Toast.LENGTH_SHORT).show();
                                 progressDialog.dismiss();
                                 finish();
                             }
@@ -290,20 +255,19 @@ public class Pop extends Activity {
                     conditionRef.child("description").setValue(desrpUp).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
-                            Toast.makeText(Pop.this, "Done upoading ", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(PopPost.this, "Done upoading ", Toast.LENGTH_SHORT).show();
                             finish();
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(Pop.this, "Some ERROR happned", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(PopPost.this, "Some ERROR happned", Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
             }
         });
     }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         StringBuilder s = new StringBuilder();

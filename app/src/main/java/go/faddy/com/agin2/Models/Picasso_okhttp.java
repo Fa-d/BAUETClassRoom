@@ -1,4 +1,4 @@
-package go.faddy.com.agin2;
+package go.faddy.com.agin2.Models;
 
 import android.app.Application;
 
@@ -16,5 +16,6 @@ public class Picasso_okhttp extends Application {
         Picasso built = builder.build();
         built.setLoggingEnabled(true);
         Picasso.setSingletonInstance(built);
+
     }
 }

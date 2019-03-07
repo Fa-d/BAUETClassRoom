@@ -1,4 +1,4 @@
-package go.faddy.com.agin2;
+package go.faddy.com.agin2.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,7 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import go.faddy.com.agin2.Adapters.tabpagerAdapter;
-import go.faddy.com.agin2.ExtraActivity.ClassTestActivity;
+import go.faddy.com.agin2.R;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -96,15 +96,15 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_ass) {
-            // Handle the camera action
+            goToNext("assignment");
         } else if (id == R.id.nav_ct) {
-            startActivity(new Intent(this, ClassTestActivity.class));
+            goToNext("class_test");
         } else if (id == R.id.nav_home) {
 
         } else if (id == R.id.nav_hw) {
-
+            goToNext("home_work");
         } else if (id == R.id.nav_labr) {
-
+            goToNext("lab_report");
         } else if (id == R.id.nav_res) {
 
         }
@@ -112,5 +112,11 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void goToNext(String x) {
+        Intent intent = new Intent(getApplicationContext(), MainShowingPost.class);
+        intent.putExtra("name", x);
+        startActivity(intent);
     }
 }
