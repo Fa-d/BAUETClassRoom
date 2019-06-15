@@ -1,4 +1,4 @@
-package go.faddy.com.agin2.Activities;
+package go.faddy.com.agin2.activities;
 
 import android.content.Context;
 import android.content.Intent;
@@ -39,8 +39,8 @@ public class LoginActivity extends AppCompatActivity {
     Boolean flag = false;
     Button btn;
     TextView txt;
-    static int nav_ID;
-    static String nav_NAME;
+    public static int nav_ID;
+    public static String nav_NAME;
     SharedPreferences.Editor editor;
 
 
@@ -134,7 +134,6 @@ public class LoginActivity extends AppCompatActivity {
         if (sp.getBoolean("logged", false)) {
             goToMainActivity();
         }
-
         txt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -143,7 +142,6 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
-
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -162,12 +160,13 @@ public class LoginActivity extends AppCompatActivity {
                                     public void onComplete(@NonNull Task<AuthResult> task) {
                                         if (task.isSuccessful()) {
                                             Toast.makeText(LoginActivity.this, "Registration Sucessful", Toast.LENGTH_SHORT).show();
-                                            goToMainActivity();
+
                                             sp.edit().putBoolean("logged", true).apply();
                                             good[0] = getSharedPreferences("login", MODE_PRIVATE);
                                             SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                                             editor = sharedPreferences.edit();
                                             editor.putString("username", nav_NAME).putString("useID", String.valueOf(nav_ID)).apply();
+                                            goToMainActivity();
                                             finish();
                                         } else {
                                             if (task.getException() instanceof FirebaseAuthUserCollisionException) {
@@ -177,12 +176,13 @@ public class LoginActivity extends AppCompatActivity {
                                                     public void onComplete(@NonNull Task<AuthResult> task) {
                                                         if (task.isSuccessful()) {
                                                             Toast.makeText(LoginActivity.this, "You would have been logged in by now", Toast.LENGTH_SHORT).show();
-                                                            goToMainActivity();
+
                                                             sp.edit().putBoolean("logged", true).apply();
                                                             good[0] = getSharedPreferences("login", MODE_PRIVATE);
                                                             editor = good[0].edit();
                                                             editor.putString("username", nav_NAME).putString("useID", String.valueOf(nav_ID)).apply();
-                                                            finish();
+                                                            goToMainActivity();
+
                                                         } else {
                                                             Toast.makeText(LoginActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                                                         }
@@ -210,6 +210,7 @@ public class LoginActivity extends AppCompatActivity {
         registredRef.child("student").child(String.valueOf(nav_ID)).child("name").setValue(nav_NAME);
         registredRef.child("student").child(String.valueOf(nav_ID)).child("registered").setValue("yes");
         i.putExtra("id", nav_ID);
+        finish();
         startActivity(i);
     }
 

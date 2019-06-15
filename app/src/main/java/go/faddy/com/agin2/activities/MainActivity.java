@@ -1,6 +1,7 @@
-package go.faddy.com.agin2.Activities;
+package go.faddy.com.agin2.activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -12,28 +13,32 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
-import go.faddy.com.agin2.Adapters.tabpagerAdapter;
+import go.faddy.com.agin2.adapters.tabpagerAdapter;
 import go.faddy.com.agin2.R;
+import go.faddy.com.agin2.service.FirebaseBackgroundService;
+
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
+    SharedPreferences sp;
+    public static String nav_ID;
+    public static String nav_NAME;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        startService(new Intent(getApplicationContext(), FirebaseBackgroundService.class));
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         TabLayout tabLayout = findViewById(R.id.tabs);
         ViewPager pager = findViewById(R.id.viewpager);
-
         tabpagerAdapter TabPagerAdapter = new tabpagerAdapter(getSupportFragmentManager());
         pager.setAdapter(TabPagerAdapter);
         tabLayout.setupWithViewPager(pager);
-
-
 //        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 //        fab.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -42,20 +47,19 @@ public class MainActivity extends AppCompatActivity
 //                        .setAction("Action", null).show();
 //            }
 //        });
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-//        View headView = navigationView.getHeaderView(0);
-//        TextView name_header = headView.findViewById(R.id.user_name);
-//        TextView id_header = headView.findViewById(R.id.user_id);
-//        name_header.setText(name);
-//        id_header.setText(ID);
+        View headView = navigationView.getHeaderView(0);
+        TextView name_header = headView.findViewById(R.id.username);
+        TextView id_header = headView.findViewById(R.id.userid);
+
+        name_header.setText(sp.getString(nav_NAME, ""));
+        id_header.setText(String.valueOf(sp.getInt(nav_ID, 0)));
     }
 
     @Override
@@ -84,6 +88,7 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            startActivity(new Intent(getApplicationContext(), Settings.class));
             return true;
         }
         return super.onOptionsItemSelected(item);

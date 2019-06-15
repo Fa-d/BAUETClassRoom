@@ -1,4 +1,4 @@
-package go.faddy.com.agin2.Models;
+package go.faddy.com.agin2.models;
 
 import java.util.List;
 

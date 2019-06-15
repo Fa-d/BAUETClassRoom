@@ -1,4 +1,4 @@
-package go.faddy.com.agin2.Activities;
+package go.faddy.com.agin2.activities;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -37,7 +37,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 import go.faddy.com.agin2.R;
-import static go.faddy.com.agin2.Fragments.CalenderFrag.STRING_EXTRA;
+import static go.faddy.com.agin2.fragments.CalenderFrag.STRING_EXTRA;
 
 public class PopPost extends Activity {
     RadioButton filesYes, filesNo, radioButton;

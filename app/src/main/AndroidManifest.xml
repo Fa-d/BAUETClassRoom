@@ -1,29 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="go.faddy.com.agin2">
 
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
-        android:name=".Models.Picasso_okhttp"
+        android:name=".models.Picasso_okhttp"
         android:allowBackup="true"
+        android:fullBackupContent="@xml/backup_descriptor"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".Activities.PopGet"
-            android:theme="@style/AppTheme.CustomTheme"/>
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
+        <meta-data
+            android:name="com.google.android.actions"
+            android:resource="@xml/actions" />
 
-        <activity android:name=".Activities.MainShowingPost" />
+        <activity android:name=".activities.Settings" />
         <activity
-            android:name=".Activities.LoginActivity"
+            android:name=".activities.PopRoutine"
+            android:theme="@style/AppTheme.CustomTheme" />
+        <activity
+            android:name=".activities.PopGet"
+            android:theme="@style/AppTheme.CustomTheme" />
+        <activity android:name=".activities.MainShowingPost" />
+        <activity
+            android:name=".activities.LoginActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -33,11 +46,14 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activities.MainActivity"
+            android:name=".activities.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
+
+
+
         <activity
-            android:name=".Activities.PopPost"
+            android:name=".activities.PopPost"
             android:theme="@style/AppTheme.CustomTheme" />
     </application>
 

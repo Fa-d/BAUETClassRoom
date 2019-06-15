@@ -1,4 +1,4 @@
-package go.faddy.com.agin2.Activities;
+package go.faddy.com.agin2.activities;
 
 import android.os.Bundle;
 import android.os.Vibrator;
@@ -16,8 +16,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import go.faddy.com.agin2.Adapters.VerticalRecyclerViewAdapter;
-import go.faddy.com.agin2.Models.RetrivingTexts;
+import go.faddy.com.agin2.adapters.VerticalRecyclerViewAdapter;
+import go.faddy.com.agin2.models.RetrivingTexts;
 import go.faddy.com.agin2.R;
 
 public class MainShowingPost extends AppCompatActivity {

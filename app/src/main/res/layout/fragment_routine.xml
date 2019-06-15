@@ -5,17 +5,21 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="7"
-    tools:context=".Fragments.RoutineFrag">
+    tools:context=".fragments.RoutineFrag">
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_weight="4">
+
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical">
+
             <Button
+                android:background="#A4FF0000"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -23,7 +27,10 @@
                 android:text="6th"
                 android:textSize="10sp"
                 android:textStyle="bold" />
+
             <Button
+
+                android:background="#A4FF3C00"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -31,7 +38,9 @@
                 android:text="5th"
                 android:textSize="10sp"
                 android:textStyle="bold" />
+
             <Button
+                android:background="#A4FF8C00"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -40,27 +49,36 @@
                 android:textSize="10sp"
                 android:textStyle="bold" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical">
+
             <Button
+                android:background="@drawable/background_transparent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:rotation="-90"
                 android:textSize="10sp"
                 android:textStyle="bold" />
+
             <Button
+                android:id="@+id/sun_5th"
+                android:background="#F8CDFC"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:rotation="-90"
-                android:text="CSE 3103"
+                android:text="CSE 3109"
                 android:textSize="10sp"
                 android:textStyle="bold" />
+
             <Button
+                android:id="@+id/sun_4th"
+                android:background="#FCEFC7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -69,20 +87,25 @@
                 android:textSize="10sp"
                 android:textStyle="bold" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical">
+
             <Button
+                android:background="#FDC1D6"
+                android:id="@+id/mon_4th"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_weight="1"
 
-                android:text="CSE 310"
+                android:text="CSE 3104"
                 android:textSize="10sp"
                 android:textStyle="bold" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -90,6 +113,8 @@
             android:orientation="vertical">
 
             <Button
+                android:id="@+id/tue_2nd"
+                android:background="#B1BBF7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -99,34 +124,35 @@
                 android:textStyle="bold" />
 
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical">
-       <LinearLayout
-
-           android:layout_width="match_parent"
-           android:layout_height="match_parent">
-           <Button
-               android:id="@+id/good"
-               android:layout_width="match_parent"
-               android:layout_height="match_parent"
-               android:background="#E79898"
-               android:text="CSE
-               3106"
-               android:textSize="10sp"
-               android:textStyle="bold" />
-       </LinearLayout>
-
-
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <Button
+                    android:id="@+id/wed_4th"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#FFF9CC"
+                    android:text="CSE 3106"
+                    android:textSize="10sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical">
+
             <Button
+                android:id="@+id/thr_6th"
+                android:background="#FDD6D3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -134,7 +160,10 @@
                 android:text="CSE 3107"
                 android:textSize="10sp"
                 android:textStyle="bold" />
+
             <Button
+                android:id="@+id/thr_5th"
+                android:background="#DDFFB4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -142,7 +171,10 @@
                 android:text="CSE 3101"
                 android:textSize="10sp"
                 android:textStyle="bold" />
+
             <Button
+                android:id="@+id/thr_4th"
+                android:background="#C8CEFA"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -152,24 +184,32 @@
                 android:textStyle="bold" />
         </LinearLayout>
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <Button
+            android:id="@+id/tea_break"
+            android:background="@drawable/background_transparent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Tea Break" />
+            android:text="TEA BREAK" />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_weight="3">
+
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical">
+
             <Button
+                android:background="#A4FFDD00"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -177,7 +217,9 @@
                 android:text="6th"
                 android:textSize="10sp"
                 android:textStyle="bold" />
+
             <Button
+                android:background="#A4D0FF00"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -185,7 +227,9 @@
                 android:text="2nd"
                 android:textSize="10sp"
                 android:textStyle="bold" />
+
             <Button
+                android:background="#A46AFF00"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -193,7 +237,9 @@
                 android:text="1th"
                 android:textSize="10sp"
                 android:textStyle="bold" />
+
             <Button
+                android:background="#A1701901"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -202,12 +248,16 @@
                 android:textSize="10sp"
                 android:textStyle="bold" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical">
+
             <Button
+                android:id="@+id/sun_3rd"
+                android:background="#C8CEFA"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -215,7 +265,10 @@
                 android:text="CSE 3103"
                 android:textSize="10sp"
                 android:textStyle="bold" />
+
             <Button
+                android:id="@+id/sun_2nd"
+                android:background="#DDFFB4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -223,7 +276,10 @@
                 android:text="CSE 3101"
                 android:textSize="10sp"
                 android:textStyle="bold" />
+
             <Button
+                android:id="@+id/sun_1st"
+                android:background="#F35447"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -231,7 +287,9 @@
                 android:text="C.T."
                 android:textSize="10sp"
                 android:textStyle="bold" />
+
             <Button
+                android:background="#A3701901"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -240,12 +298,16 @@
                 android:textSize="10sp"
                 android:textStyle="bold" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical">
+
             <Button
+                android:id="@+id/mon_3rd"
+                android:background="#F8CDFC"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -253,15 +315,21 @@
                 android:text="CSE 3109"
                 android:textSize="10sp"
                 android:textStyle="bold" />
+
             <Button
+                android:id="@+id/mon_2nd"
+                android:background="#FDD6D3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:rotation="-90"
-                android:text="CSE 3103"
+                android:text="CSE 3107"
                 android:textSize="10sp"
                 android:textStyle="bold" />
+
             <Button
+                android:id="@+id/mon_1st"
+                android:background="#FCEFC7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -269,7 +337,9 @@
                 android:text="CSE 3105"
                 android:textSize="10sp"
                 android:textStyle="bold" />
+
             <Button
+                android:background="#97701901"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -278,6 +348,7 @@
                 android:textSize="10sp"
                 android:textStyle="bold" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -285,6 +356,8 @@
             android:orientation="vertical">
 
             <Button
+                android:id="@+id/tue_1st"
+                android:background="#C1A9FCEC"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="4"
@@ -293,6 +366,7 @@
                 android:textStyle="bold" />
 
             <Button
+                android:background="#88701901"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight=".5"
@@ -301,12 +375,16 @@
                 android:textSize="10sp"
                 android:textStyle="bold" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical">
+
             <Button
+                android:id="@+id/wed_3rd"
+                android:background="#C8CEFA"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -314,7 +392,10 @@
                 android:text="CSE 3103"
                 android:textSize="10sp"
                 android:textStyle="bold" />
+
             <Button
+                android:id="@+id/wed_2nd"
+                android:background="#DDFFB4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -322,7 +403,10 @@
                 android:text="CSE 3101"
                 android:textSize="10sp"
                 android:textStyle="bold" />
+
             <Button
+                android:id="@+id/wed_1st"
+                android:background="#F35447"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -330,7 +414,9 @@
                 android:text="C.T."
                 android:textSize="10sp"
                 android:textStyle="bold" />
+
             <Button
+                android:background="#75701901"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -339,20 +425,27 @@
                 android:textSize="10sp"
                 android:textStyle="bold" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical">
+
             <Button
+                android:id="@+id/thu_3rd"
+                android:background="#F8CDFC"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:rotation="-90"
-                android:text="6th"
+                android:text="CSE 3109"
                 android:textSize="10sp"
                 android:textStyle="bold" />
+
             <Button
+                android:id="@+id/thu_2nd"
+                android:background="#FDD6D3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -360,7 +453,10 @@
                 android:text="CSE 3107"
                 android:textSize="10sp"
                 android:textStyle="bold" />
+
             <Button
+                android:id="@+id/thu_1st"
+                android:background="#FCEFC7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -368,7 +464,9 @@
                 android:text="CSE 3105"
                 android:textSize="10sp"
                 android:textStyle="bold" />
+
             <Button
+                android:background="#65701901"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

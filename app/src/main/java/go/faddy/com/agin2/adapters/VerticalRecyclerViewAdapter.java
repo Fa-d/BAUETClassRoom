@@ -1,4 +1,4 @@
-package go.faddy.com.agin2.Adapters;
+package go.faddy.com.agin2.adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -20,7 +20,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import go.faddy.com.agin2.Models.RetrivingTexts;
+import go.faddy.com.agin2.models.RetrivingTexts;
 import go.faddy.com.agin2.R;
 
 public class VerticalRecyclerViewAdapter extends RecyclerView.Adapter<VerticalRecyclerViewAdapter.VerticalTextHolder> {

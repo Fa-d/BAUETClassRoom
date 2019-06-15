@@ -1,4 +1,4 @@
-package go.faddy.com.agin2.Fragments;
+package go.faddy.com.agin2.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.applandeo.materialcalendarview.CalendarView;
 import com.applandeo.materialcalendarview.EventDay;
@@ -28,13 +29,19 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
-import go.faddy.com.agin2.Activities.PopGet;
-import go.faddy.com.agin2.Activities.PopPost;
-import go.faddy.com.agin2.Models.RetrivingDates;
+import go.faddy.com.agin2.activities.PopGet;
+import go.faddy.com.agin2.activities.PopPost;
+import go.faddy.com.agin2.models.RetrivingDates;
 import go.faddy.com.agin2.R;
 import go.faddy.com.agin2.utils.DrawableUtils;
 
 import static android.content.Context.VIBRATOR_SERVICE;
+import static go.faddy.com.agin2.activities.Settings.ALARM_PER;
+import static go.faddy.com.agin2.activities.Settings.TIME_6;
+import static go.faddy.com.agin2.activities.Settings.TIME_7;
+import static go.faddy.com.agin2.activities.Settings.TIME_8;
+import static go.faddy.com.agin2.activities.Settings.TIME_9;
+import static go.faddy.com.agin2.activities.Settings.TIME_10;
 
 public class CalenderFrag extends Fragment implements OnSelectDateListener {
     public static String STRING_EXTRA = "CAL";
@@ -45,13 +52,14 @@ public class CalenderFrag extends Fragment implements OnSelectDateListener {
     CalendarView calendarView;
     Intent intent;
     public Vibrator vi;
-    public List<RetrivingDates> retrivingDatesCT, retrivingDatesAss,
-            retrivingDatesHW, retrivingDatesLR;
+    public ArrayList<RetrivingDates> retrivingDatesCT = new ArrayList<>(), retrivingDatesAss = new ArrayList<>(),
+            retrivingDatesHW = new ArrayList<>(), retrivingDatesLR = new ArrayList<>();
     public List<EventDay> events;
 
     public CalenderFrag() {
         // Required empty public constructor
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -61,19 +69,25 @@ public class CalenderFrag extends Fragment implements OnSelectDateListener {
         calendarView = v.findViewById(R.id.calendarview);
         radioGroup = v.findViewById(R.id.radiogroup);
         events = new ArrayList<>();
+
         calendarView.setOnDayClickListener(new OnDayClickListener() {
             @Override
             public void onDayClick(EventDay eventDay) {
-
+                getFirebaseObjects();
                 int radioId = radioGroup.getCheckedRadioButtonId();
                 radioButton = v.findViewById(radioId);
                 getRadio = v.findViewById(R.id.get);
                 postRadio = v.findViewById(R.id.post);
+
                 if (radioButton == getRadio) {
-                    if((retrivingDatesCT != null) || (retrivingDatesAss != null) ||
-                            (retrivingDatesHW != null) || (retrivingDatesLR != null)){
-                        startActivity(new Intent(getActivity(), PopGet.class));
-                    }
+                    Intent intent = new Intent(getActivity(), PopGet.class);
+                    intent.putParcelableArrayListExtra("ct", retrivingDatesCT);
+                    intent.putParcelableArrayListExtra("ass", retrivingDatesAss);
+                    intent.putParcelableArrayListExtra("lab", retrivingDatesLR);
+                    intent.putParcelableArrayListExtra("hw", retrivingDatesHW);
+                    Date y = eventDay.getCalendar().getTime();
+                    intent.putExtra("date", y.getTime());
+                    startActivity(intent);
                 } else if (radioButton == postRadio) {
                     intent = new Intent(getActivity().getApplicationContext(), PopPost.class);
                     Date y = eventDay.getCalendar().getTime();
@@ -92,31 +106,30 @@ public class CalenderFrag extends Fragment implements OnSelectDateListener {
 
     private void getFirebaseObjects() {
         DatabaseReference dataRef = FirebaseDatabase.getInstance().getReference().child("posts").child("type");
-        retrivingDatesCT = new ArrayList<>();
-        retrivingDatesAss = new ArrayList<>();
-        retrivingDatesHW = new ArrayList<>();
-        retrivingDatesLR = new ArrayList<>();
-        retrivingDatesLR.clear();
-        retrivingDatesAss.clear();
-        retrivingDatesHW.clear();
 
         //for retriving classtest dates
         ValueEventListener eventListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                retrivingDatesCT.clear();
                 for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-                    vi.vibrate(200);
+//                    vi.vibrate(200);
                     RetrivingDates re = dataSnapshot1.getValue(RetrivingDates.class);
                     retrivingDatesCT.add(re);
                 }
                 for (int i = 0; i < retrivingDatesCT.size(); i++) {
                     String month = retrivingDatesCT.get(i).getMonth();
                     String day = retrivingDatesCT.get(i).getDay();
+                    String year = retrivingDatesCT.get(i).getYear();
                     Calendar calendar1 = Calendar.getInstance();
-                    calendar1.add(Calendar.MONTH, Integer.valueOf(month) - 3);
-                    calendar1.add(Calendar.DAY_OF_MONTH, Integer.valueOf(day) - 7);
-                    events.add(new EventDay(calendar1, DrawableUtils.getCircleDrawableWithText(getContext(), "CT")));
-//                    calendarView.setEvents(events);
+                    calendar1.set(Calendar.MONTH, Integer.valueOf(month)-1);
+                    calendar1.set(Calendar.DAY_OF_MONTH, Integer.valueOf(day));
+                    try {
+                        events.add(new EventDay(calendar1, DrawableUtils.getCircleDrawableWithText(getContext(), "CT")));
+                    } catch (Exception e) {
+//                        Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                    calendarView.setEvents(events);
                 }
             }
 
@@ -131,6 +144,7 @@ public class CalenderFrag extends Fragment implements OnSelectDateListener {
         dataRef.child("home_work").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                retrivingDatesHW.clear();
                 for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                     RetrivingDates re = dataSnapshot1.getValue(RetrivingDates.class);
                     retrivingDatesHW.add(re);
@@ -139,9 +153,13 @@ public class CalenderFrag extends Fragment implements OnSelectDateListener {
                     String month = retrivingDatesHW.get(i).getMonth();
                     String day = retrivingDatesHW.get(i).getDay();
                     Calendar calendar1 = Calendar.getInstance();
-                    calendar1.add(Calendar.MONTH, Integer.valueOf(month) - 3);
-                    calendar1.add(Calendar.DAY_OF_MONTH, Integer.valueOf(day) - 7);
-                    events.add(new EventDay(calendar1, DrawableUtils.getCircleDrawableWithText(getContext(), "HW")));
+                    calendar1.set(Calendar.MONTH, Integer.valueOf(month) -1);
+                    calendar1.set(Calendar.DAY_OF_MONTH, Integer.valueOf(day) );
+                    try {
+                        events.add(new EventDay(calendar1, DrawableUtils.getCircleDrawableWithText(getContext(), "HW")));
+                    } catch (Exception e) {
+//                        Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
 //                    calendarView.setEvents(events);
                 }
             }
@@ -155,6 +173,7 @@ public class CalenderFrag extends Fragment implements OnSelectDateListener {
         dataRef.child("assignment").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                retrivingDatesAss.clear();
                 for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                     RetrivingDates re = dataSnapshot1.getValue(RetrivingDates.class);
                     retrivingDatesAss.add(re);
@@ -163,9 +182,13 @@ public class CalenderFrag extends Fragment implements OnSelectDateListener {
                     String month = retrivingDatesAss.get(i).getMonth();
                     String day = retrivingDatesAss.get(i).getDay();
                     Calendar calendar1 = Calendar.getInstance();
-                    calendar1.add(Calendar.MONTH, Integer.valueOf(month) - 3);
-                    calendar1.add(Calendar.DAY_OF_MONTH, Integer.valueOf(day) - 7);
-                    events.add(new EventDay(calendar1, DrawableUtils.getCircleDrawableWithText(getContext(), "ASS")));
+                    calendar1.set(Calendar.MONTH, Integer.valueOf(month)-1);
+                    calendar1.set(Calendar.DAY_OF_MONTH, Integer.valueOf(day));
+                    try {
+                        events.add(new EventDay(calendar1, DrawableUtils.getCircleDrawableWithText(getContext(), "ASS")));
+                    } catch (Exception e) {
+//                        Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
 //                    calendarView.setEvents(events);
                 }
             }
@@ -179,6 +202,7 @@ public class CalenderFrag extends Fragment implements OnSelectDateListener {
         dataRef.child("lab_report").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                retrivingDatesLR.clear();
                 for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                     RetrivingDates re = dataSnapshot1.getValue(RetrivingDates.class);
                     retrivingDatesLR.add(re);
@@ -187,9 +211,13 @@ public class CalenderFrag extends Fragment implements OnSelectDateListener {
                     String month = retrivingDatesLR.get(i).getMonth();
                     String day = retrivingDatesLR.get(i).getDay();
                     Calendar calendar1 = Calendar.getInstance();
-                    calendar1.add(Calendar.MONTH, Integer.valueOf(month) - 3);
-                    calendar1.add(Calendar.DAY_OF_MONTH, Integer.valueOf(day) - 7);
-                    events.add(new EventDay(calendar1, DrawableUtils.getCircleDrawableWithText(getContext(), "LR")));
+                    calendar1.set(Calendar.MONTH, Integer.valueOf(month)-1);
+                    calendar1.set(Calendar.DAY_OF_MONTH, Integer.valueOf(day));
+                    try {
+                        events.add(new EventDay(calendar1, DrawableUtils.getCircleDrawableWithText(getContext(), "LR")));
+                    } catch (Exception e) {
+//                        Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
                     calendarView.setEvents(events);
                 }
             }
@@ -198,6 +226,11 @@ public class CalenderFrag extends Fragment implements OnSelectDateListener {
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
         });
+        setAlarm();
+    }
+
+    private void setAlarm() {
+
     }
 
     @Override

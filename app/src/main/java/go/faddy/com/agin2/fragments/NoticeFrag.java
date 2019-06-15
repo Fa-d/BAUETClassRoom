@@ -1,4 +1,4 @@
-package go.faddy.com.agin2.Fragments;
+package go.faddy.com.agin2.fragments;
 
 
 import android.os.Bundle;

@@ -1,4 +1,4 @@
-package go.faddy.com.agin2.Adapters;
+package go.faddy.com.agin2.adapters;
 
 import android.content.Context;
 import android.os.Vibrator;

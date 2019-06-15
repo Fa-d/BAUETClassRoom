@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="15dp"
+    tools:context=".activities.Settings">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="Enable Notification: "
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <RadioGroup
+            android:id="@+id/notifi_grp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/notifi_yes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Yes" />
+
+            <RadioButton
+                android:id="@+id/notifi_no"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="No" />
+        </RadioGroup>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="30dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="Set an alarm: "
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <RadioGroup
+            android:id="@+id/alarm_grp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="15dp">
+
+            <RadioButton
+                android:id="@+id/alarm_yes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Yes" />
+
+            <RadioButton
+                android:id="@+id/alarm_no"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="No" />
+        </RadioGroup>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/alarm_times"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+
+        android:paddingTop="50dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="Alarm at the day before: "
+            android:textSize="20sp" />
+
+        <RadioGroup
+            android:id="@+id/alarm_time_grp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="15dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="50dp">
+
+            <RadioButton
+                android:id="@+id/alarm_6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="06:00 P.M." />
+
+            <RadioButton
+                android:id="@+id/alarm_7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="07:00 P.M." />
+
+            <RadioButton
+                android:id="@+id/alarm_8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="08:00 P.M." />
+
+            <RadioButton
+                android:id="@+id/alarm_9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="09:00 P.M." />
+
+            <RadioButton
+                android:id="@+id/alarm_10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="10:00 P.M." />
+        </RadioGroup>
+        <Button
+            android:id="@+id/good_to_go"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="All good to go"/>
+    </LinearLayout>
+
+
+</LinearLayout>
